@@ -334,7 +334,7 @@ string command_selection(int command_number) {
 			width = SetWidth();
 			radius = SetRadius();
 			color = SetColor();
-			command = str + ":" + color + ":" + xyfirst + heigth + ":" + width + ":" + radius;
+			command = str + ":" + color + ":" + xyfirst + ":" + heigth + ":" + width + ":" + radius;
 			break;
 		/*DrawRoundedRectangle*/
 		case 11:
@@ -428,7 +428,7 @@ int main()
 				command = command_selection(command_number);
 				if (size(command) < 10140) {
 					strcpy(buff, command.c_str());
-
+					cout << command << endl;
 					// Передача повідомлень на сервер
 					sendto(my_sock, &buff[0], strlen(&buff[0]), 0, (sockaddr*)&dest_addr, sizeof(dest_addr));
 					sockaddr_in server_addr;
