@@ -18,13 +18,13 @@ const int DRAW_IMGAGE = 13;
 const int SET_ORIENTATION = 14;
 const int GET_WIDTH = 15;
 const int GET_HEIGTH = 16;
-const int COMMAND_NOT_FOUTD = -2;
+const int COMMAND_NOT_FOUND = -2;
 const int INCORRECT_PARAMETERS = -1;
 const int PARSER_OK = 0;
 using namespace std;
 
 struct DATA {
-    int number_command = 0, pointsXYfirst[2] = { 0, 0 }, pointsXYlast[2] = { 0,0 }, wigth = 0, heidth = 0, font = 0, color[3] = { 0, 0, 0 }, radius = 0, angle = 0;
+    int number_command = 0, pointsXYfirst[2] = { 0, 0 }, pointsXYlast[2] = { 0,0 }, width = 0, height = 0, font = 0, color[3] = { 0, 0, 0 }, radius = 0, angle = 0;
     string text;
 };
 void split_string(string str, string delimiter, string* mas) {
@@ -167,8 +167,8 @@ int parser(string str, DATA* data) {
             }
         }
         try {
-            data->wigth = stoi(sub_line[3]);
-            if (data->wigth < 0) {
+            data->width = stoi(sub_line[3]);
+            if (data->width < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -177,8 +177,8 @@ int parser(string str, DATA* data) {
             goto exit;
         }
         try {
-            data->heidth = stoi(sub_line[4]);
-            if (data->heidth < 0) {
+            data->height = stoi(sub_line[4]);
+            if (data->height < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -218,8 +218,8 @@ int parser(string str, DATA* data) {
             }
         }
         try {
-            data->wigth = stoi(sub_line[3]);
-            if (data->wigth < 0) {
+            data->width = stoi(sub_line[3]);
+            if (data->width < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -229,8 +229,8 @@ int parser(string str, DATA* data) {
             goto exit;
         }
         try {
-            data->heidth = stoi(sub_line[4]);
-            if (data->heidth < 0) {
+            data->height = stoi(sub_line[4]);
+            if (data->height < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -271,8 +271,8 @@ int parser(string str, DATA* data) {
             }
         }
         try {
-            data->wigth = stoi(sub_line[3]);
-            if (data->wigth < 0) {
+            data->width = stoi(sub_line[3]);
+            if (data->width < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -282,8 +282,8 @@ int parser(string str, DATA* data) {
             goto exit;
         }
         try {
-            data->heidth = stoi(sub_line[4]);
-            if (data->heidth < 0) {
+            data->height = stoi(sub_line[4]);
+            if (data->height < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -324,8 +324,8 @@ int parser(string str, DATA* data) {
             }
         }
         try {
-            data->wigth = stoi(sub_line[3]);
-            if (data->wigth < 0) {
+            data->width = stoi(sub_line[3]);
+            if (data->width < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -335,8 +335,8 @@ int parser(string str, DATA* data) {
             goto exit;
         }
         try {
-            data->heidth = stoi(sub_line[4]);
-            if (data->heidth < 0) {
+            data->height = stoi(sub_line[4]);
+            if (data->height < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -461,8 +461,8 @@ int parser(string str, DATA* data) {
             }
         }
         try {
-            data->wigth = stoi(sub_line[3]);
-            if (data->wigth < 0) {
+            data->width = stoi(sub_line[3]);
+            if (data->width < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -472,8 +472,8 @@ int parser(string str, DATA* data) {
             goto exit;
         }
         try {
-            data->heidth = stoi(sub_line[4]);
-            if (data->heidth < 0) {
+            data->height = stoi(sub_line[4]);
+            if (data->height < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -525,8 +525,8 @@ int parser(string str, DATA* data) {
             }
         }
         try {
-            data->wigth = stoi(sub_line[3]);
-            if (data->wigth < 0) {
+            data->width = stoi(sub_line[3]);
+            if (data->width < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -536,8 +536,8 @@ int parser(string str, DATA* data) {
             goto exit;
         }
         try {
-            data->heidth = stoi(sub_line[4]);
-            if (data->heidth < 0) {
+            data->height = stoi(sub_line[4]);
+            if (data->height < 0) {
                 result = INCORRECT_PARAMETERS;
                 goto exit;
             }
@@ -606,7 +606,7 @@ int parser(string str, DATA* data) {
         /*get height*/
     }
     else {
-        result = COMMAND_NOT_FOUTD;
+        result = COMMAND_NOT_FOUND;
         return result;
     }
     result = PARSER_OK;
