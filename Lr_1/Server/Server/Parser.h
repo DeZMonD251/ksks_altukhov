@@ -436,8 +436,7 @@ int parser(string str, DATA* data) {
     else {
     return -2;
     }
-    return 0;
     delete[] main_line;
     delete[] sub_line;
     delete[] temp;
-}
+    return 0;}
