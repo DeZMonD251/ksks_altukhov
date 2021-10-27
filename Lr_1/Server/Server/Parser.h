@@ -20,6 +20,7 @@ const int GET_WIDTH = 15;
 const int GET_HEIGTH = 16;
 const int COMMAND_NOT_FOUTD = -2;
 const int INCORRECT_PARAMETERS = -1;
+const int PARSER_OK = 0;
 using namespace std;
 
 struct DATA {
@@ -465,4 +466,4 @@ int parser(string str, DATA* data) {
     delete[] main_line;
     delete[] sub_line;
     delete[] temp;
-    return 0;}
+    return PARSER_OK;}

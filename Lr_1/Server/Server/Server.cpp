@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
         int client_addr_size = sizeof(client_addr);
         int bsize = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&client_addr, &client_addr_size);
         command_client = string(buff);
-        if (parser(command_client, &data) == 0) {
+        if (parser(command_client, &data) == PARSER_OK) {
             cout << "Ok!" << endl;
         }
         if (parser(command_client, &data) == INCORRECT_PARAMETERS) {
