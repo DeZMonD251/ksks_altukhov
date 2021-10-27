@@ -120,10 +120,10 @@ int main(int argc, char* argv[]) {
         if (parser(command_client, &data) == 0) {
             cout << "Ok!" << endl;
         }
-        if (parser(command_client, &data) == -1) {
+        if (parser(command_client, &data) == INCORRECT_PARAMETERS) {
             cout << "Ошибка! Некорректные парамметры функции!" << endl;
         }
-        if (parser(command_client, &data) == -2) {
+        if (parser(command_client, &data) == COMMAND_NOT_FOUTD) {
             cout << "Ошибка! Функция не найдена!" << endl;
         }
         if (bsize == SOCKET_ERROR)
