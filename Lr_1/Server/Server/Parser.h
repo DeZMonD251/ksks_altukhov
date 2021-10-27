@@ -27,7 +27,7 @@ struct DATA {
     int number_command = 0, pointsXYfirst[2] = { 0, 0 }, pointsXYlast[2] = { 0,0 }, wigth = 0, heidth = 0, font = 0, color[3] = { 0, 0, 0 }, radius = 0, angle = 0;
     string text;
 };
-void highlightingTheMainLine(string str, string delimiter, string* mas) {
+void split_string(string str, string delimiter, string* mas) {
     int i = 0, pos = 0;
     while ((pos = str.find(delimiter)) != string::npos) {
         mas[i] = str.substr(0, pos);
@@ -38,13 +38,13 @@ void highlightingTheMainLine(string str, string delimiter, string* mas) {
 int parser(string str, DATA* data) {
     string* temp = new string[50];
     string* main_line = new string[50];/*2:12#12#12#:50@48@:*ллллл => 2:12#12#12:50@48@: and ллллл*/
-    highlightingTheMainLine(str, "*", main_line);
+    split_string(str, "*", main_line);
     string* sub_line = new string[50];/*2:12#12#12:50@48@: => 2 and 12#12#12 and 50@48@*/
-    highlightingTheMainLine(main_line[0], ":", sub_line);
+    split_string(main_line[0], ":", sub_line);
     data->number_command = stoi(sub_line[0]);
     if (data->number_command == CLEAR_DISPLAY) {
         /*clear display*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -59,7 +59,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_PIXEL) {
         /*draw pixel*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -71,7 +71,7 @@ int parser(string str, DATA* data) {
                 return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -86,7 +86,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_LINE) {
         /*draw line*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -97,7 +97,7 @@ int parser(string str, DATA* data) {
                 return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -109,7 +109,7 @@ int parser(string str, DATA* data) {
                 return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[3], "@", temp);
+        split_string(sub_line[3], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -124,7 +124,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_RECTANGLE) {
         /*draw rectangle*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -136,7 +136,7 @@ int parser(string str, DATA* data) {
                 return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -163,7 +163,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_RECTANGLE) {
         /*fill rectangle*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -174,7 +174,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -200,7 +200,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_ELLIPSE) {
         /*draw ellipse*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -211,7 +211,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -237,7 +237,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_ELLIPSE) {
         /*fill ellipse*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -248,7 +248,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -274,7 +274,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_CIRCLE) {
         /*draw circle*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -285,7 +285,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -305,7 +305,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_CIRCLE) {
         /*fill circle*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -316,7 +316,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -336,7 +336,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_ROUNDED_RECTANGLE) {
         /*draw rounded rectangle*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -347,7 +347,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -379,7 +379,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_ROUNDED_RECTANGLE) {
         /*fill rounded rectangle*/
-        highlightingTheMainLine(sub_line[1], "#", temp);
+        split_string(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
             try
             {
@@ -390,7 +390,7 @@ int parser(string str, DATA* data) {
                 delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
             }
         }
-        highlightingTheMainLine(sub_line[2], "@", temp);
+        split_string(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
@@ -422,7 +422,7 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_TEXT) {
         /*draw text*/
-        highlightingTheMainLine(sub_line[1], "@", temp);
+        split_string(sub_line[1], "@", temp);
         for (size_t i = 0; i < 2; i++) {
             try
             {
