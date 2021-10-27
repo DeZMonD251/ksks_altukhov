@@ -26,154 +26,405 @@ int parser(string str, DATA* data) {
         /*clear display*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
     }
     else if (data->number_command == 2) {
         /*draw pixel*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
     }
     else if (data->number_command == 3) {
         /*draw line*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[3], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYlast[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYlast[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
     }
     else if (data->number_command == 4) {
         /*draw rectangle*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->wigth = stoi(sub_line[3]);
-        data->heidth = stoi(sub_line[4]);
+        try {
+            data->wigth = stoi(sub_line[3]);
+        } catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->heidth = stoi(sub_line[4]);
+        } catch (const std::exception&) {
+            return -1;
+        }
+        
+        
     }
     else if (data->number_command == 5) {
         /*fill rectangle*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->wigth = stoi(sub_line[3]);
-        data->heidth = stoi(sub_line[4]);
+        try {
+            data->wigth = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->heidth = stoi(sub_line[4]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 6) {
         /*draw ellipse*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->wigth = stoi(sub_line[3]);
-        data->heidth = stoi(sub_line[4]);
+        try {
+            data->wigth = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->heidth = stoi(sub_line[4]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 7) {
         /*fill ellipse*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->wigth = stoi(sub_line[3]);
-        data->heidth = stoi(sub_line[4]);
+        try {
+            data->wigth = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->heidth = stoi(sub_line[4]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 8) {
         /*draw circle*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->radius = stoi(sub_line[3]);
+        try {
+            data->radius = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 9) {
         /*fill circle*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->radius = stoi(sub_line[3]);
+        try {
+            data->radius = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 10) {
         /*draw rounded rectangle*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->wigth = stoi(sub_line[3]);
-        data->heidth = stoi(sub_line[4]);
-        data->radius = stoi(sub_line[5]);
+        try {
+            data->wigth = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->heidth = stoi(sub_line[4]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->radius = stoi(sub_line[5]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 11) {
         /*fill rounded rectangle*/
         highlightingTheMainLine(sub_line[1], "#", temp);
         for (size_t i = 0; i < 3; i++) {
-            data->color[i] = stoi(temp[i]);
+            try
+            {
+                data->color[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         highlightingTheMainLine(sub_line[2], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
-        data->wigth = stoi(sub_line[3]);
-        data->heidth = stoi(sub_line[4]);
-        data->radius = stoi(sub_line[5]);
+        try {
+            data->wigth = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->heidth = stoi(sub_line[4]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
+        try {
+            data->radius = stoi(sub_line[5]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 12) {
         /*draw text*/
         highlightingTheMainLine(sub_line[1], "@", temp);
         for (size_t i = 0; i < 2; i++) {
-            data->pointsXYfirst[i] = stoi(temp[i]);
+            try
+            {
+                data->pointsXYfirst[i] = stoi(temp[i]);
+            }
+            catch (const std::exception&)
+            {
+                return -1;
+            }
         }
         data->text = sub_line[2];
-        data->font = stoi(sub_line[3]);
+        try {
+            data->font = stoi(sub_line[3]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 13) {
         /*draw image*/
     }
     else if (data->number_command == 14) {
         /*set orientation*/
-        data->angle = stoi(sub_line[1]);
+        try {
+            data->angle = stoi(sub_line[1]);
+        }
+        catch (const std::exception&) {
+            return -1;
+        }
     }
     else if (data->number_command == 15) {
         /*get width*/
@@ -183,10 +434,10 @@ int parser(string str, DATA* data) {
         /*get height*/
     }
     else {
-        //cout << "Ошибка. Команда не найдена." << endl;
+    return -2;
     }
+    return 0;
     delete[] main_line;
     delete[] sub_line;
     delete[] temp;
-    return data->color[0];
 }
