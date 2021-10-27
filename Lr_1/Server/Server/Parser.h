@@ -152,12 +152,20 @@ int parser(string str, DATA* data) {
         }
         try {
             data->wigth = stoi(sub_line[3]);
+            if (data->wigth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         } catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
+            if (data->heidth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         } catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
             goto exit;
@@ -191,6 +199,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->wigth = stoi(sub_line[3]);
+            if (data->wigth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -198,6 +210,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->heidth = stoi(sub_line[4]);
+            if (data->heidth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -232,6 +248,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->wigth = stoi(sub_line[3]);
+            if (data->wigth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -239,6 +259,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->heidth = stoi(sub_line[4]);
+            if (data->heidth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -273,6 +297,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->wigth = stoi(sub_line[3]);
+            if (data->wigth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -280,6 +308,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->heidth = stoi(sub_line[4]);
+            if (data->heidth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -314,6 +346,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->radius = stoi(sub_line[3]);
+            if (data->radius > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -348,6 +384,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->radius = stoi(sub_line[3]);
+            if (data->radius > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -382,6 +422,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->wigth = stoi(sub_line[3]);
+            if (data->wigth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -389,6 +433,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->heidth = stoi(sub_line[4]);
+            if (data->heidth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -396,6 +444,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->radius = stoi(sub_line[5]);
+            if (data->radius > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -430,6 +482,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->wigth = stoi(sub_line[3]);
+            if (data->wigth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -437,6 +493,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->heidth = stoi(sub_line[4]);
+            if (data->heidth > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -444,6 +504,10 @@ int parser(string str, DATA* data) {
         }
         try {
             data->radius = stoi(sub_line[5]);
+            if (data->radius > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
@@ -467,6 +531,10 @@ int parser(string str, DATA* data) {
         data->text = sub_line[2];
         try {
             data->font = stoi(sub_line[3]);
+            if (data->font > 0) {
+                result = INCORRECT_PARAMETERS;
+                goto exit;
+            }
         }
         catch (const std::exception&) {
             result = INCORRECT_PARAMETERS;
