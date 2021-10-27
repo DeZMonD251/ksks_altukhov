@@ -31,7 +31,6 @@ string myarray[16][2] = {
         {"15","get width"},
         {"16","get height"}
 };
-
 void command_selection_(DATA data) {
     switch (data.number_command) {
         /*clear display*/
@@ -83,8 +82,7 @@ void command_selection_(DATA data) {
         break;
     }
 }
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     char buff[10 * 1014];
     setlocale(LC_ALL, "Rus");
     string command_client;
@@ -114,13 +112,20 @@ int main(int argc, char* argv[])
         WSACleanup();
         return -1;
     }
-    while (1)
-    {
+    while (1){
         sockaddr_in client_addr;
         int client_addr_size = sizeof(client_addr);
         int bsize = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&client_addr, &client_addr_size);
         command_client = string(buff);
-        parser(command_client, &data);
+        if (parser(command_client, &data) == 0) {
+            cout << "Ok!" << endl;
+        }
+        if (parser(command_client, &data) == -1) {
+            cout << "Ошибка! Некорректные парамметры функции!" << endl;
+        }
+        if (parser(command_client, &data) == -2) {
+            cout << "Ошибка! Функция не найдена!" << endl;
+        }
         if (bsize == SOCKET_ERROR)
             printf("recvfrom() error: %d \n", WSAGetLastError());
         HOSTENT* hst;
