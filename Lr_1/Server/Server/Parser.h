@@ -36,6 +36,7 @@ void split_string(string str, string delimiter, string* mas) {
     }
 }
 int parser(string str, DATA* data) {
+    int result;
     string* temp = new string[50];
     string* main_line = new string[50];/*2:12#12#12#:50@48@:*ллллл => 2:12#12#12:50@48@: and ллллл*/
     split_string(str, "*", main_line);
@@ -52,8 +53,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line;delete[] sub_line;delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
     }
@@ -67,8 +68,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -79,8 +80,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
     }
@@ -94,7 +95,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -105,8 +107,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[3], "@", temp);
@@ -117,8 +119,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
     }
@@ -132,8 +134,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -144,22 +146,22 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp;
-                return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->wigth = stoi(sub_line[3]);
         } catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
         } catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
-        
-        
     }
     else if (data->number_command == FILL_RECTANGLE) {
         /*fill rectangle*/
@@ -171,7 +173,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -182,20 +185,23 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->wigth = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == DRAW_ELLIPSE) {
@@ -208,7 +214,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -219,20 +226,23 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->wigth = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == FILL_ELLIPSE) {
@@ -245,7 +255,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -256,20 +267,23 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->wigth = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == DRAW_CIRCLE) {
@@ -282,7 +296,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -293,14 +308,16 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->radius = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == FILL_CIRCLE) {
@@ -313,7 +330,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -324,14 +342,16 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->radius = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == DRAW_ROUNDED_RECTANGLE) {
@@ -344,7 +364,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -355,26 +376,30 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->wigth = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->radius = stoi(sub_line[5]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == FILL_ROUNDED_RECTANGLE) {
@@ -387,7 +412,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         split_string(sub_line[2], "@", temp);
@@ -398,26 +424,30 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         try {
             data->wigth = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->heidth = stoi(sub_line[4]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
         try {
             data->radius = stoi(sub_line[5]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == DRAW_TEXT) {
@@ -430,7 +460,8 @@ int parser(string str, DATA* data) {
             }
             catch (const std::exception&)
             {
-                delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+                result = INCORRECT_PARAMETERS;
+                goto exit;
             }
         }
         data->text = sub_line[2];
@@ -438,7 +469,8 @@ int parser(string str, DATA* data) {
             data->font = stoi(sub_line[3]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == DRAW_IMGAGE) {
@@ -450,7 +482,8 @@ int parser(string str, DATA* data) {
             data->angle = stoi(sub_line[1]);
         }
         catch (const std::exception&) {
-            delete[] main_line; delete[] sub_line; delete[] temp; return INCORRECT_PARAMETERS;
+            result = INCORRECT_PARAMETERS;
+            goto exit;
         }
     }
     else if (data->number_command == GET_WIDTH) {
@@ -461,9 +494,13 @@ int parser(string str, DATA* data) {
         /*get height*/
     }
     else {
-    return COMMAND_NOT_FOUTD;
+        result = COMMAND_NOT_FOUTD;
+        return result;
     }
+    result = PARSER_OK;
+    exit:
     delete[] main_line;
     delete[] sub_line;
     delete[] temp;
-    return PARSER_OK;}
+    return result;
+}
