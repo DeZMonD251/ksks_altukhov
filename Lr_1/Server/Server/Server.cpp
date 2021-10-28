@@ -31,6 +31,7 @@ string myarray[16][2] = {
         {"15","get width"},
         {"16","get height"}
 };
+string s = "4:23#2#3#:123@-4232@:12:21:*fsda";
 void command_selection_(DATA data) {
     switch (data.number_command) {
         /*clear display*/
@@ -117,13 +118,13 @@ int main(int argc, char* argv[]) {
         int client_addr_size = sizeof(client_addr);
         int bsize = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&client_addr, &client_addr_size);
         command_client = string(buff);
-        if (parser(command_client, &data) == PARSER_OK) {
+        if (parser(command_client, &data) == OK) {
             cout << "Ok!" << endl;
         }
         if (parser(command_client, &data) == INCORRECT_PARAMETERS) {
             cout << "Ошибка! Некорректные парамметры функции!" << endl;
         }
-        if (parser(command_client, &data) == COMMAND_NOT_FOUTD) {
+        if (parser(command_client, &data) == COMMAND_NOT_FOUND) {
             cout << "Ошибка! Функция не найдена!" << endl;
         }
         if (bsize == SOCKET_ERROR)
