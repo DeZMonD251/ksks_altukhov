@@ -363,12 +363,12 @@ string command_selection(int command_number) {
 		/*GetHiegth*/
 		case 14:
 			cout << "GetHiegth" << endl;
-			command = str + ";";
+			command = "15";
 			break;
 		/*GetWidth*/
 		case 15:
 			cout << "GetWidth" << endl;
-			command = str + ";";
+			command = "16";
 			break;
 		default:
 			break;
@@ -378,7 +378,8 @@ string command_selection(int command_number) {
 
 int main()
 {
-	char buff[10 * 1014];
+	char buff[1024];
+	int n;
 	setlocale(LC_ALL, "Rus");
 	printf("UDP DEMO Client \nType quit to quit \n");
 	string str, command;
@@ -406,10 +407,12 @@ int main()
 	// Визначення IP_адреса вузла
 	if (inet_addr(SERVERADDR)){
 		dest_addr.sin_addr.s_addr = inet_addr(SERVERADDR);
-	} else {
+	} 
+	else {
 		if (hst = gethostbyname(SERVERADDR)) {
 			dest_addr.sin_addr.s_addr = ((unsigned long**)hst->h_addr_list)[0][0];
-		} else {
+		} 
+		else {
 			printf("Unknown host : %d \n", WSAGetLastError());
 			closesocket(my_sock);
 			WSACleanup();
@@ -426,22 +429,23 @@ int main()
 			int command_number = stoi(str);
 			if (command_number >= 1 && command_number <= 15) {
 				command = command_selection(command_number);
-				if (size(command) < 10140) {
+				if (size(command) < 1023) {
 					strcpy(buff, command.c_str());
-					cout << command << endl;
 					// Передача повідомлень на сервер
 					sendto(my_sock, &buff[0], strlen(&buff[0]), 0, (sockaddr*)&dest_addr, sizeof(dest_addr));
-					sockaddr_in server_addr;
-					int server_addr_size = sizeof(server_addr);
-					int n = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&server_addr, &server_addr_size);
-					if (n == SOCKET_ERROR)
-					{
-						printf("recvfrom() error: %d \n", WSAGetLastError());
-						closesocket(my_sock);
-						WSACleanup();
-						return -1;
-					}
-					buff[n] = 0;
+					if (command_number == 14 || command_number == 15) {
+						sockaddr_in server_addr;
+						int server_addr_size = sizeof(server_addr);
+						int n = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&server_addr, &server_addr_size);
+						buff[n] = '\0';
+						printf("Server : %s\n", buff);
+						if (n == SOCKET_ERROR) {
+							printf("recvfrom() error: %d \n", WSAGetLastError());
+							closesocket(my_sock);
+							WSACleanup();
+							return -1;
+						}
+					}			
 				}
 			}
 		} else if (str == "quit") {
