@@ -22,6 +22,7 @@ using namespace std;
 
 char fontArr[] = {"Roboto-Bold.ttf"};
 int bgColor[3] = { 0, 0, 0};
+string s = "15:*safdaf";
 RenderWindow window(VideoMode(WIDTH, HEIGTH), "Lr2KSKS");
 int command_selection(DATA *data) {
     while (window.isOpen())
@@ -137,16 +138,15 @@ int command_selection(DATA *data) {
         }
         else if (data->number_command == SET_ORIENTATION) {}
         else if (data->number_command == GET_WIDTH) {
-            cout << "Ширина: " << WIDTH << endl;
+        return WIDTH;
         }
         else if (data->number_command == GET_HEIGTH) {
-            cout << "Высота: " << HEIGTH << endl;
+        return HEIGTH;
         }
         else {
             return COMMAND_NOT_FOUND;
         }
         window.display();
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
             break;
@@ -158,7 +158,7 @@ int command_selection(DATA *data) {
 int main(int argc, char* argv[]) {
     char buff[10 * 1014];
     setlocale(LC_ALL, "Rus");
-    string command_client;
+    string command_client, send_command;
     DATA data;
     printf("UDP DEMO echo_Server \n");
     if (WSAStartup(0x202, (WSADATA*)&buff[0]))
@@ -191,8 +191,13 @@ int main(int argc, char* argv[]) {
         int bsize = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&client_addr, &client_addr_size);
         command_client = string(buff);
         if (parser(command_client, &data) == OK) {
-            command_selection(&data);
-            cout << "Ok!" << endl;
+            send_command = to_string(command_selection(&data));
+            if (send_command == to_string(OK)) {
+            }
+            else if (send_command == to_string(WIDTH) || send_command == to_string(HEIGTH)) {
+                const char* str = send_command.c_str();
+                sendto(my_sock, str, send_command.size(), 0, (sockaddr*)&client_addr, sizeof(client_addr));
+            }
         }
         if (parser(command_client, &data) == INCORRECT_PARAMETERS) {
             cout << "Ошибка! Некорректные парамметры функции!" << endl;
@@ -204,8 +209,6 @@ int main(int argc, char* argv[]) {
             printf("recvfrom() error: %d \n", WSAGetLastError());
         HOSTENT* hst;
         hst = gethostbyaddr((char*)&client_addr.sin_addr, 4, AF_INET);
-        buff[bsize] = 0;
-        sendto(my_sock, &buff[0], bsize, 0, (sockaddr*)&client_addr, sizeof(client_addr));
     }
     return 0;
 }

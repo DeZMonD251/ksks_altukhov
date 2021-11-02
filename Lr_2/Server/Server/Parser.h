@@ -369,26 +369,10 @@ int parser(string str, DATA* data) {
         }
         else {}
     }
-    else if (data->number_command == DRAW_IMGAGE) {
-        /*draw image*/
-    }
-    else if (data->number_command == SET_ORIENTATION) {
-        /*set orientation*/
-        try {
-            data->angle = stoi(sub_line[1]);
-        }
-        catch (const std::exception&) {
-            result = INCORRECT_PARAMETERS;
-            goto exit;
-        }
-    }
-    else if (data->number_command == GET_WIDTH) {
-        /*get width*/
-
-    }
-    else if (data->number_command == GET_HEIGTH) {
-        /*get height*/
-    }
+    else if (data->number_command == DRAW_IMGAGE) {}
+    else if (data->number_command == SET_ORIENTATION) {}
+    else if (data->number_command == GET_WIDTH) {}
+    else if (data->number_command == GET_HEIGTH) {}
     else {
         result = COMMAND_NOT_FOUND;
         return result;
