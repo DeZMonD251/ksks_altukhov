@@ -1,0 +1,3 @@
+﻿  Server.cpp
+D:\Study\3 Курс 1 семерст\КСКС\Lr_1\Server\Server\Parser.h(162,17): warning C4101: ans: неиспользованная локальная переменная
+  Server.vcxproj -> D:\Study\3 Курс 1 семерст\КСКС\Lr_1\Server\Debug\Server.exe
