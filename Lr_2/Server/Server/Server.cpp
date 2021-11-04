@@ -20,12 +20,11 @@ const int HEIGTH = 800;
 using namespace sf;
 using namespace std;
 
-DATA* d;
 char fontArr[] = { "Roboto-Bold.ttf" };
 int bgColor[3] = { 0, 0, 0 };
+RenderWindow window(VideoMode(WIDTH, HEIGTH), "Lr2KSKS");
 
-DWORD WINAPI command_selection(LPVOID lpParam) {
-    RenderWindow window(VideoMode(WIDTH, HEIGTH), "Lr2KSKS");
+DWORD WINAPI GUI(LPVOID lpParam) {
     while (window.isOpen())
     {
         Event event;
@@ -34,125 +33,121 @@ DWORD WINAPI command_selection(LPVOID lpParam) {
             if (event.type == Event::Closed)
                 window.close();
         }
-        if (d->number_command == CLEAR_DISPLAY) {
-            bgColor[0] = d->color[0];
-            bgColor[1] = d->color[1];
-            bgColor[2] = d->color[2];
-            window.clear(Color(d->color[0], d->color[1], d->color[2]));
-        }
-        else if (d->number_command == DRAW_PIXEL) {
-            RectangleShape pixel(Vector2f(1, 1));
-            pixel.setFillColor(Color(d->color[0], d->color[1], d->color[2]));
-            pixel.setOutlineColor(Color(d->color[0], d->color[1], d->color[2]));
-            pixel.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(pixel);
-        }
-        else if (d->number_command == DRAW_LINE) {
-            sf::Vertex line[] =
-            {
-                sf::Vertex(sf::Vector2f(d->pointsXYfirst[0], d->pointsXYfirst[1]), Color(d->color[0], d->color[1], d->color[2])),
-                sf::Vertex(sf::Vector2f(d->pointsXYlast[0], d->pointsXYlast[0]), Color(d->color[0], d->color[1], d->color[2]))
-            };
-            window.draw(line, 2, sf::Lines);
-        }
-        else if (d->number_command == DRAW_RECTANGLE) {
-            RectangleShape rectangle;
-            rectangle.setSize(Vector2f(d->width, d->height));
-            rectangle.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            rectangle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
-            rectangle.setOutlineThickness(1);
-            rectangle.setOutlineColor(Color(d->color[0], d->color[1], d->color[2]));
-            window.draw(rectangle);
-        }
-        else if (d->number_command == FILL_RECTANGLE) {
-            RectangleShape rectangle;
-            rectangle.setSize(Vector2f(d->width, d->height));
-            rectangle.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            rectangle.setFillColor(Color(d->color[0], d->color[1], d->color[2]));
-            window.draw(rectangle);
-        }
-        else if (d->number_command == DRAW_ELLIPSE) {
-            CircleShape ellipse(d->height);
-            float sub = (float)(d->height) / (float)(d->width);
-            ellipse.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
-            ellipse.setOutlineThickness(1);
-            ellipse.setOutlineColor(Color(d->color[0], d->color[1], d->color[2]));
-            ellipse.setScale(1.f, sub);
-            ellipse.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(ellipse);
-        }
-        else if (d->number_command == FILL_ELLIPSE) {
-            CircleShape ellipse(d->height);
-            float sub = (float)(d->height) / (float)(d->width);
-            ellipse.setFillColor(Color(d->color[0], d->color[1], d->color[2]));
-            ellipse.setScale(1.f, sub);
-            ellipse.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(ellipse);
-        }
-        else if (d->number_command == DRAW_CIRCLE) {
-            CircleShape circle;
-            circle.setRadius(d->radius);
-            circle.setOutlineColor(Color(d->color[0], d->color[1], d->color[2]));
-            circle.setOutlineThickness(1);
-            circle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
-            circle.setPosition(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(circle);
-        }
-        else if (d->number_command == FILL_CIRCLE) {
-            CircleShape circle;
-            circle.setRadius(d->radius);
-            circle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
-            circle.setPosition(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(circle);
-        }
-        else if (d->number_command == DRAW_ROUNDED_RECTANGLE) {
-            RoundedRectangleShape filledRoundedRectangle(Vector2f(d->width, d->height), d->radius, 100);
-            filledRoundedRectangle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
-            filledRoundedRectangle.setOutlineThickness(1);
-            filledRoundedRectangle.setOutlineColor(Color(d->color[0], d->color[1], d->color[2]));
-            filledRoundedRectangle.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(filledRoundedRectangle);
-        }
-        else if (d->number_command == FILL_ROUNDED_RECTANGLE) {
-            RoundedRectangleShape filledRoundedRectangle(Vector2f(d->width, d->height), d->radius, 100);
-            filledRoundedRectangle.setFillColor(Color(d->color[0], d->color[1], d->color[2]));
-            filledRoundedRectangle.move(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(filledRoundedRectangle);
-        }
-        else if (d->number_command == DRAW_TEXT) {
-            Font font;
-            if (!font.loadFromFile(fontArr)) {
-                cout << "Font upload error" << endl;
-            }
-            Text text;
-            text.setFont(font);
-            text.setString(d->text);
-            text.setCharacterSize(d->font);
-            text.setFillColor(Color(d->color[0], d->color[1], d->color[2]));
-            text.setPosition(d->pointsXYfirst[0], d->pointsXYfirst[1]);
-            window.draw(text);
-        }
-        else if (d->number_command == DRAW_IMGAGE) {
-
-        }
-        else if (d->number_command == SET_ORIENTATION) {}
-        else if (d->number_command == GET_WIDTH) {
-           //answer = WIDTH;
-        }
-        else if (d->number_command == GET_HEIGTH) {
-            //answer = HEIGTH;
-        }
-        else {}
         window.display();
     }
     return 0;
 }
 
+int command_selection(DATA *data) {
+    if (data->number_command == CLEAR_DISPLAY) {
+        bgColor[0] = data->color[0];
+        bgColor[1] = data->color[1];
+        bgColor[2] = data->color[2];
+        window.clear(Color(data->color[0], data->color[1], data->color[2]));
+    }
+    else if (data->number_command == DRAW_PIXEL) {
+        RectangleShape pixel(Vector2f(1, 1));
+        pixel.setFillColor(Color(data->color[0], data->color[1], data->color[2]));
+        pixel.setOutlineColor(Color(data->color[0], data->color[1], data->color[2]));
+        pixel.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(pixel);
+    }
+    else if (data->number_command == DRAW_LINE) {
+        sf::Vertex line[] =
+        {
+            sf::Vertex(sf::Vector2f(data->pointsXYfirst[0], data->pointsXYfirst[1]), Color(data->color[0], data->color[1], data->color[2])),
+            sf::Vertex(sf::Vector2f(data->pointsXYlast[0], data->pointsXYlast[0]), Color(data->color[0], data->color[1], data->color[2]))
+        };
+        window.draw(line, 2, sf::Lines);
+    }
+    else if (data->number_command == DRAW_RECTANGLE) {
+        RectangleShape rectangle;
+        rectangle.setSize(Vector2f(data->width, data->height));
+        rectangle.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        rectangle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
+        rectangle.setOutlineThickness(1);
+        rectangle.setOutlineColor(Color(data->color[0], data->color[1], data->color[2]));
+        window.draw(rectangle);
+    }
+    else if (data->number_command == FILL_RECTANGLE) {
+        RectangleShape rectangle;
+        rectangle.setSize(Vector2f(data->width, data->height));
+        rectangle.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        rectangle.setFillColor(Color(data->color[0], data->color[1], data->color[2]));
+        window.draw(rectangle);
+    }
+    else if (data->number_command == DRAW_ELLIPSE) {
+        CircleShape ellipse(data->height);
+        float sub = (float)(data->height) / (float)(data->width);
+        ellipse.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
+        ellipse.setOutlineThickness(1);
+        ellipse.setOutlineColor(Color(data->color[0], data->color[1], data->color[2]));
+        ellipse.setScale(1.f, sub);
+        ellipse.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(ellipse);
+    }
+    else if (data->number_command == FILL_ELLIPSE) {
+        CircleShape ellipse(data->height);
+        float sub = (float)(data->height) / (float)(data->width);
+        ellipse.setFillColor(Color(data->color[0], data->color[1], data->color[2]));
+        ellipse.setScale(1.f, sub);
+        ellipse.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(ellipse);
+    }
+    else if (data->number_command == DRAW_CIRCLE) {
+        CircleShape circle;
+        circle.setRadius(data->radius);
+        circle.setOutlineColor(Color(data->color[0], data->color[1], data->color[2]));
+        circle.setOutlineThickness(1);
+        circle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
+        circle.setPosition(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(circle);
+    }
+    else if (data->number_command == FILL_CIRCLE) {
+        CircleShape circle;
+        circle.setRadius(data->radius);
+        circle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
+        circle.setPosition(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(circle);
+    }
+    else if (data->number_command == DRAW_ROUNDED_RECTANGLE) {
+        RoundedRectangleShape filledRoundedRectangle(Vector2f(data->width, data->height), data->radius, 100);
+        filledRoundedRectangle.setFillColor(Color(bgColor[0], bgColor[1], bgColor[2]));
+        filledRoundedRectangle.setOutlineThickness(1);
+        filledRoundedRectangle.setOutlineColor(Color(data->color[0], data->color[1], data->color[2]));
+        filledRoundedRectangle.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(filledRoundedRectangle);
+    }
+    else if (data->number_command == FILL_ROUNDED_RECTANGLE) {
+        RoundedRectangleShape filledRoundedRectangle(Vector2f(data->width, data->height), data->radius, 100);
+        filledRoundedRectangle.setFillColor(Color(data->color[0], data->color[1], data->color[2]));
+        filledRoundedRectangle.move(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(filledRoundedRectangle);
+    }
+    else if (data->number_command == DRAW_TEXT) {
+        Font font;
+        if (!font.loadFromFile(fontArr)) {
+            cout << "Font upload error" << endl;
+        }
+        Text text;
+        text.setFont(font);
+        text.setString(data->text);
+        text.setCharacterSize(data->font);
+        text.setFillColor(Color(data->color[0], data->color[1], data->color[2]));
+        text.setPosition(data->pointsXYfirst[0], data->pointsXYfirst[1]);
+        window.draw(text);
+    }
+    else if (data->number_command == DRAW_IMGAGE) {}
+    else if (data->number_command == SET_ORIENTATION) {}
+    else if (data->number_command == GET_WIDTH) {}
+    else if (data->number_command == GET_HEIGTH) {}
+    else {}
+}
+
 int main(int argc, char* argv[]) {
     DATA data;
-    d = &data;
     DWORD dwThreadId, dwThrdParam = 1;
-    HANDLE hThread = CreateThread(NULL, 0, command_selection, &dwThrdParam, 0, &dwThreadId);
+    HANDLE hThread = CreateThread(NULL, 0, GUI, &dwThrdParam, 0, &dwThreadId);
     char buff[1024];
     setlocale(LC_ALL, "Rus");
     string command_client, send_command;
@@ -187,6 +182,7 @@ int main(int argc, char* argv[]) {
         int bsize = recvfrom(my_sock, &buff[0], sizeof(buff) - 1, 0, (sockaddr*)&client_addr, &client_addr_size);
         command_client = string(buff);
         if (parser(command_client, &data) == OK) {
+            command_selection(&data);
             if (data.number_command == GET_WIDTH) {
                 send_command = to_string(WIDTH);
                 const char* str = send_command.c_str();
