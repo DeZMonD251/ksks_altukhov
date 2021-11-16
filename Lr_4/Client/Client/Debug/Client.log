@@ -1,0 +1,10 @@
+﻿  Client.cpp
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Display.h(98,81): warning C4474: "snprintf" : для строки формата передано слишком много аргументов
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Display.h(98,81): message : заполнители и их параметры ожидают переменное число аргументов в количестве 5, но было предоставлено 6
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Display.h(105,81): warning C4474: "snprintf" : для строки формата передано слишком много аргументов
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Display.h(105,81): message : заполнители и их параметры ожидают переменное число аргументов в количестве 5, но было предоставлено 6
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Client.cpp(309,55): warning C4305: аргумент: усечение из "unsigned long" в "uint_least16_t"
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Client.cpp(309,32): warning C4309: аргумент: усечение константного значения
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Client.cpp(288,6): warning C4101: n: неиспользованная локальная переменная
+D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Client\Display.h(178): warning C4715: Display::sendCommand: значение возвращается не при всех путях выполнения
+  Client.vcxproj -> D:\Study\3 Курс 1 семерст\КСКС\Lr_4\Client\Debug\Client.exe
