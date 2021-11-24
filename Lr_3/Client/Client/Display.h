@@ -49,7 +49,6 @@ public:
     void fillScreen(uint_least16_t color) {
         hexToRGB(color, colorArr);
         snprintf(buffer, buffer_length, "1:%i#%i#%i#:*", colorArr[0], colorArr[1], colorArr[2]);
-        cout << buffer << endl;
         sendCommand(buffer);
     };
 
