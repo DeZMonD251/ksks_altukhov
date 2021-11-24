@@ -73,6 +73,22 @@ int fill_struct_arr(DATA  *data, string sub_line, string command, string *temp) 
             }
         }
     }
+    else if (command == "color") {
+        split_string(sub_line, "#", temp);
+        for (size_t i = 0; i < 3; i++) {
+            if (!presence_of_letters(temp[i])) {
+                if (stoi(temp[i]) >= 0 && stoi(temp[i]) <= 255) {
+                    data->color[i] = stoi(temp[i]);
+                }
+                else {
+                    return INCORRECT_PARAMETERS;
+                }
+            }
+            else {
+                return INCORRECT_PARAMETERS;
+            }
+        }
+    }
     else
     {
         return COMMAND_NOT_FOUND;
@@ -141,17 +157,6 @@ int fill_struct(DATA* data, string sub_line, string command) {
     }
     return OK;
 }
-void hexToRGB(uint16_t hexValue, int* arr) {
-    int r = ((hexValue >> 11) & 0x1F);  // Extract the 5 R bits
-    int g = ((hexValue >> 5) & 0x3F);   // Extract the 6 G bits
-    int b = ((hexValue) & 0x1F);        // Extract the 5 B bits
-    r = ((r * 255) / 31) - 4;
-    g = ((g * 255) / 63) - 2;
-    b = ((b * 255) / 31) - 4;
-    arr[0] = r;
-    arr[1] = g;
-    arr[2] = b;
-}
 int parser(string str, DATA* data) {
     int result;
     string color;
@@ -163,16 +168,25 @@ int parser(string str, DATA* data) {
     data->number_command = stoi(sub_line[0]);
     if (data->number_command == CLEAR_DISPLAY) {
         /*clear display*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-    }
-    else if (data->number_command == DRAW_PIXEL) {
-        /*draw pixel*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS) {
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND) {
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND) {
+            result = COMMAND_NOT_FOUND;
+            goto exit;
+        }
+        else {}
+    }
+    else if (data->number_command == DRAW_PIXEL) {
+        /*draw pixel*/
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS) {
+            result = INCORRECT_PARAMETERS;
+            goto exit;
+        }
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
             goto exit;
         }
@@ -180,13 +194,14 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_LINE) {
         /*draw line*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS || 
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct_arr(data, sub_line[3], "pointsXYlast", temp) == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND || 
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct_arr(data, sub_line[3], "pointsXYlast", temp) == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
             goto exit;
@@ -194,15 +209,16 @@ int parser(string str, DATA* data) {
         else {}
     }
     else if (data->number_command == DRAW_RECTANGLE) {
-        hexToRGB(stoi(sub_line[1]), data->color);
         /*draw rectangle*/
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
@@ -212,14 +228,15 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_RECTANGLE) {
         /*fill rectangle*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
@@ -229,14 +246,15 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_ELLIPSE) {
         /*draw ellipse*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
@@ -246,14 +264,15 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_ELLIPSE) {
         /*fill ellipse*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
@@ -263,13 +282,14 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_CIRCLE) {
         /*draw circle*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "radius") == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "radius") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
             goto exit;
@@ -278,13 +298,14 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_CIRCLE) {
         /*fill circle*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "radius") == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "radius") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
             goto exit;
@@ -293,15 +314,16 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_ROUNDED_RECTANGLE) {
         /*draw rounded rectangle*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[5], "radius") == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[5], "radius") == COMMAND_NOT_FOUND) {
@@ -312,15 +334,16 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == FILL_ROUNDED_RECTANGLE) {
         /*fill rounded rectangle*/
-        hexToRGB(stoi(sub_line[1]), data->color);
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[5], "radius") == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[3], "height") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[4], "width") == COMMAND_NOT_FOUND ||
             fill_struct(data, sub_line[5], "radius") == COMMAND_NOT_FOUND) {
@@ -331,15 +354,16 @@ int parser(string str, DATA* data) {
     }
     else if (data->number_command == DRAW_TEXT) {
         /*draw text*/
-        hexToRGB(stoi(sub_line[1]), data->color);
         data->text = sub_line[4];
-        if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
-            fill_struct(data, sub_line[3], "font") == INCORRECT_PARAMETERS ) {
+        if (fill_struct_arr(data, sub_line[1], "color", temp) == INCORRECT_PARAMETERS ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == INCORRECT_PARAMETERS ||
+            fill_struct(data, sub_line[3], "font") == INCORRECT_PARAMETERS) {
             result = INCORRECT_PARAMETERS;
             goto exit;
         }
-        else if (fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
-            fill_struct(data, sub_line[3], "font") == COMMAND_NOT_FOUND ) {
+        else if (fill_struct_arr(data, sub_line[1], "color", temp) == COMMAND_NOT_FOUND ||
+            fill_struct_arr(data, sub_line[2], "pointsXYfirst", temp) == COMMAND_NOT_FOUND ||
+            fill_struct(data, sub_line[3], "font") == COMMAND_NOT_FOUND) {
             result = COMMAND_NOT_FOUND;
             goto exit;
         }
