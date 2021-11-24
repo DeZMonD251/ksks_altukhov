@@ -2,9 +2,6 @@
 #ifndef Display_h
 #define Display_h
 
-#define PORT 777
-#define SERVERADDR "127.0.0.1"
-
 #include <iostream>
 #include "stdio.h"
 #include <string.h>
@@ -32,7 +29,11 @@ const int OK = 0;
 class Display : public GraphicsLib
 {
 public:
-    Display(uint_least16_t w, uint_least16_t h) : GraphicsLib(w, h) {};
+    Display(uint_least16_t w, uint_least16_t h, string servaddr_, int port_) : GraphicsLib(w, h) {
+        
+        servaddr = servaddr_;
+        port = port_;
+    };
 
     void fillScreen(uint_least16_t color) {
         snprintf(buffer, buffer_length, "1:%i:*", color);
@@ -114,27 +115,18 @@ public:
         sendCommand(buffer);
     }
 
-    void get_heigth() {
-        snprintf(
-            buffer, buffer_length, "15:*"
-        );
-        sendCommand(buffer);
-        cout << widthAndHeigth << endl;
+    int_least16_t get_heigth() {
+        return heigth;
     }
 
-    void get_width() {
-        snprintf(
-            buffer, buffer_length, "16:*"
-        );
-        sendCommand(buffer);
-        cout << widthAndHeigth << endl;
+    int_least16_t get_width() {
+        return width;
     }
-
 private:
     static const unsigned char buffer_length = 50;
     char buffer[buffer_length];
-    int width, heigth;
-    string widthAndHeigth;
+    int width, heigth, port;
+    string widthAndHeigth, servaddr;
     int sendCommand(const char* command) {
         SOCKET my_sock;
         my_sock = socket(AF_INET, SOCK_DGRAM, 0);
@@ -147,12 +139,12 @@ private:
         HOSTENT* hst;
         sockaddr_in dest_addr;
         dest_addr.sin_family = AF_INET;
-        dest_addr.sin_port = htons(PORT);
-        if (inet_addr(SERVERADDR)) {
-            dest_addr.sin_addr.s_addr = inet_addr(SERVERADDR);
+        dest_addr.sin_port = htons(port);
+        if (inet_addr(servaddr.c_str())) {
+            dest_addr.sin_addr.s_addr = inet_addr(servaddr.c_str());
         }
         else {
-            if (hst = gethostbyname(SERVERADDR)) {
+            if (hst = gethostbyname(servaddr.c_str())) {
                 dest_addr.sin_addr.s_addr = ((unsigned long**)hst->h_addr_list)[0][0];
             }
             else {
@@ -174,6 +166,25 @@ private:
             closesocket(my_sock);
             WSACleanup();
             return -1;
+        }
+        parser(widthAndHeigth);
+    }
+    void parser(string str) {
+        string* main_line = new string[50];
+        split_string(str, "*", main_line);
+        string* sub_line = new string[50];
+        split_string(main_line[0], ":", sub_line);
+        width = stoi(sub_line[0]);
+        heigth = stoi(sub_line[1]);
+        delete[] main_line;
+        delete[] sub_line;
+    }
+    void split_string(string str, string delimiter, string* mas) {
+        int i = 0, pos = 0;
+        while ((pos = str.find(delimiter)) != string::npos) {
+            mas[i] = str.substr(0, pos);
+            str.erase(0, pos + delimiter.length());
+            i++;
         }
     }
 };

@@ -10,6 +10,8 @@
 #include "Display.h"
 #include <typeinfo>
 
+#define PORT 777
+#define SERVERADDR "127.0.0.1"
 
 using namespace std;
 
@@ -273,11 +275,11 @@ void command_selection(int command_number, Display *display) {
 			break;
 		/*GetHiegth*/
 		case 14:
-			display->get_heigth();
+			cout << display->get_heigth() << endl;
 			break;
 		/*GetWidth*/
 		case 15:
-			display->get_width();
+			cout << display->get_width() << endl;
 			break;
 		default:
 			break;
@@ -295,7 +297,7 @@ int main() {
 		return -1;
 	}
 	char servadr[] = "127.0.0.1";
-	Display display = Display(320, 240);
+	Display display = Display(320, 240, SERVERADDR, PORT);
 	help();
 	while (1) {
 		cout << "////////////////////\nВведите команду или номер команды:" << endl;
