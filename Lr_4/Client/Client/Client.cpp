@@ -10,6 +10,9 @@
 #include "Display.h"
 #include <typeinfo>
 
+#define PORT 777
+#define SERVERADDR "127.0.0.1"
+
 using namespace std;
 
 string uncorrect_simv_1 = "abcdefghijklmnopqrstuvwxyz";
@@ -303,9 +306,7 @@ int main() {
 		printf("WSAStartup error : %d \n", WSAGetLastError());
 		return -1;
 	}
-	char servadr[] = "127.0.0.1";
-	Display display = Display(320, 240);
-	
+	Display display = Display(320, 240, SERVERADDR, PORT);
 	while (1) {
 		time_t currentTime;
 		struct tm* localTime;
