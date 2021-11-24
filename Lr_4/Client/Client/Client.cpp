@@ -282,6 +282,16 @@ void command_selection(int command_number, Display *display) {
 			break;
 	}
 }
+string convert(int value) {
+	string str;
+	if (value < 10) {
+		str = "0" + to_string(value);
+	}
+	else {
+		str = to_string(value);
+	}
+	return str;
+}
 
 int main() {
 	char buff[1024];
@@ -301,10 +311,7 @@ int main() {
 		struct tm* localTime;
 		time(&currentTime);
 		localTime = localtime(&currentTime);
-		int Hour = localTime->tm_hour;
-		int Min = localTime->tm_min;
-		int Sec = localTime->tm_sec;
-		str = to_string(Hour) + "." + to_string(Min) + "." + to_string(Sec);
+		str = convert(localTime->tm_hour) + "." + convert(localTime->tm_min) + "." + convert(localTime->tm_sec);
 		cout << str << endl;
 		display.drawText(15, 15, 54, RGB(255, 255, 255), str);
 		Sleep(1000);
