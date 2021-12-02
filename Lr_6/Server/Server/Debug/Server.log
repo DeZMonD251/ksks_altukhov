@@ -1,0 +1,88 @@
+﻿  Server.cpp
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(48,69): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(48,45): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(54,86): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(54,62): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(55,84): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(55,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(61,57): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(61,44): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(62,73): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(62,49): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(70,57): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(70,44): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(71,73): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(71,49): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(76,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(82,71): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(82,47): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(86,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(90,71): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(90,47): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(95,34): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(99,77): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(99,53): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(104,34): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(106,77): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(106,53): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(110,84): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(110,71): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(110,99): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(114,86): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(114,62): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(118,84): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(118,71): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(118,99): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(120,86): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(120,62): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(133,75): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Server\Server.cpp(133,51): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  Server.vcxproj -> D:\Study\3 Курс 1 семерст\КСКС\Lr_5\Server\Debug\Server.exe
